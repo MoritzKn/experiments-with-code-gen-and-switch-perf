@@ -1,10 +1,8 @@
-#[allow(non_snake_case)]
-
-pub fn nestedSwitch(input: &str) -> Option<usize> {
+pub fn nested_switch(input: &str) -> Option<usize> {
     match input.len() {
         // if, in, do
         2 => {
-            match unsafe { *input.as_bytes().get_unchecked(0) } as char {
+            match input.as_bytes()[0] as char {
                 // do
                 'd' => {
                     return Some(40);

@@ -1,6 +1,4 @@
-#[allow(non_snake_case)]
-
-pub fn basicSwitch(input: &str) -> Option<usize> {
+pub fn basic_switch(input: &str) -> Option<usize> {
     match input {
         "case" => {
             return Some(0);

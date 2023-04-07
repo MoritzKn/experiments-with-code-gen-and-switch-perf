@@ -47,40 +47,26 @@ let keywords = [
   "catch",
 ];
 
-function shuffle(unshuffled) {
-  let shuffled = unshuffled
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-
-  return shuffled;
+function shuffle(a) {
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
 }
 
-let words = shuffle([
-  ...keywords,
-  ...alpha,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-  ...keywords,
-]);
+let words = [...alpha];
+
+for (let i = 0; i < 1000; i++) {
+  words.push(...keywords);
+}
 
 let res = words.map(() => false);
 
-function nestedSwitch(input) {
+function nested_switch(input) {
   switch (input.length) {
     // if, in, do
     case 2:
@@ -310,7 +296,7 @@ function nestedSwitch(input) {
   return null;
 }
 
-function basicSwitch(input) {
+function basic_switch(input) {
   switch (input) {
     case "case":
       return 0;
@@ -401,12 +387,12 @@ function basicSwitch(input) {
   return null;
 }
 
-function testBasicSwitch() {
+function test_basic_switch() {
   let start = performance.now();
   const len = words.length;
   for (let i = 0; i < len; i++) {
     const word = words[i];
-    let index = basicSwitch(word);
+    let index = basic_switch(word);
     let isKeyword = index !== null && word === keywords[index];
     res[i] = isKeyword;
     // console.log(word, index, isKeyword);
@@ -415,12 +401,12 @@ function testBasicSwitch() {
   return took;
 }
 
-function testNestedSwitch() {
+function test_nested_switch() {
   let start = performance.now();
   const len = words.length;
   for (let i = 0; i < len; i++) {
     const word = words[i];
-    let index = nestedSwitch(word);
+    let index = nested_switch(word);
     let isKeyword = index !== null && word === keywords[index];
     res[i] = isKeyword;
     // console.log(word, index, isKeyword);
@@ -430,17 +416,27 @@ function testNestedSwitch() {
 }
 
 let iterations = 100;
-let timeBasicSwitch = 0;
-let timeNestedSwitch = 0;
-for (let i = 0; i < iterations; i++) {
-  console.log("Iteration", i, (timeBasicSwitch / timeNestedSwitch).toFixed(3));
+let time_basic_switch = 0;
+let time_nested_switch = 0;
+for (let iteration = 0; iteration < iterations; iteration++) {
+  if (iteration !== 0 && iteration % (iterations / 10) === 0) {
+    console.log(
+      "Iteration",
+      iteration,
+      (time_basic_switch / time_nested_switch).toFixed(3)
+    );
+  }
   words = shuffle(words);
 
-  timeBasicSwitch += testBasicSwitch();
-  timeNestedSwitch += testNestedSwitch();
+  time_basic_switch += test_basic_switch();
+  time_nested_switch += test_nested_switch();
 }
 
-console.log({
-  timeBasicSwitch,
-  timeNestedSwitch,
-});
+console.log();
+console.log("time_basic_switch: ", time_basic_switch);
+console.log("time_nested_switch: ", time_nested_switch);
+
+console.log(`${words.length * iterations} checks`);
+
+console.log();
+console.log("random result (stop optimization)", shuffle(res[0]));

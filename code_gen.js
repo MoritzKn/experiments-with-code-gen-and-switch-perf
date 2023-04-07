@@ -158,7 +158,7 @@ function generateNestedSwitch(values) {
 
   let ast = {
     type: "function",
-    name: "nestedSwitch",
+    name: "nested_switch",
     args: [
       {
         type: "arg",
@@ -201,7 +201,7 @@ function generateBasicSwitch(values) {
 
   let ast = {
     type: "function",
-    name: "basicSwitch",
+    name: "basic_switch",
     args: [
       {
         type: "arg",
@@ -407,6 +407,7 @@ function astToRust(ast, depth = 0) {
         }
         case "nthLetterOf": {
           return `${ast.ofVar}.as_bytes()[${ast.nth}] as char`;
+          // return `unsafe { *${ast.ofVar}.as_bytes().get_unchecked(${ast.nth}) } as char`;
         }
         case "return": {
           return `return ${astToRust(ast.value, depth)};\n` + ind;
