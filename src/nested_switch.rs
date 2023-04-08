@@ -25,11 +25,15 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                             return Some(24);
                         }
 
-                        _ => {}
+                        _ => {
+                            return None;
+                        }
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
@@ -99,7 +103,9 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
@@ -108,7 +114,10 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[0] as char {
                 // case
                 'c' => {
-                    if input == "case" {
+                    if (input.as_bytes()[1] as char == 'a')
+                        & ((input.as_bytes()[2] as char == 's')
+                            & (input.as_bytes()[3] as char == 'e'))
+                    {
                         return Some(0);
                     } else {
                         return None;
@@ -140,13 +149,18 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                             }
                         }
 
-                        _ => {}
+                        _ => {
+                            return None;
+                        }
                     }
                 }
 
                 // null
                 'n' => {
-                    if input == "null" {
+                    if (input.as_bytes()[1] as char == 'u')
+                        & ((input.as_bytes()[2] as char == 'l')
+                            & (input.as_bytes()[3] as char == 'l'))
+                    {
                         return Some(20);
                     } else {
                         return None;
@@ -189,20 +203,27 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                             }
                         }
 
-                        _ => {}
+                        _ => {
+                            return None;
+                        }
                     }
                 }
 
                 // void
                 'v' => {
-                    if input == "void" {
+                    if (input.as_bytes()[1] as char == 'o')
+                        & ((input.as_bytes()[2] as char == 'i')
+                            & (input.as_bytes()[3] as char == 'd'))
+                    {
                         return Some(19);
                     } else {
                         return None;
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
@@ -214,7 +235,10 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     match input.as_bytes()[1] as char {
                         // catch
                         'a' => {
-                            if input == "catch" {
+                            if (input.as_bytes()[2] as char == 't')
+                                & ((input.as_bytes()[3] as char == 'c')
+                                    & (input.as_bytes()[4] as char == 'h'))
+                            {
                                 return Some(41);
                             } else {
                                 return None;
@@ -223,14 +247,19 @@ pub fn nested_switch(input: &str) -> Option<usize> {
 
                         // const
                         'o' => {
-                            if input == "const" {
+                            if (input.as_bytes()[2] as char == 'n')
+                                & ((input.as_bytes()[3] as char == 's')
+                                    & (input.as_bytes()[4] as char == 't'))
+                            {
                                 return Some(38);
                             } else {
                                 return None;
                             }
                         }
 
-                        _ => {}
+                        _ => {
+                            return None;
+                        }
                     }
                 }
 
@@ -279,7 +308,9 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
@@ -336,7 +367,10 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     match input.as_bytes()[2] as char {
                         // static
                         'a' => {
-                            if input == "static" {
+                            if (input.as_bytes()[3] as char == 't')
+                                & ((input.as_bytes()[4] as char == 'i')
+                                    & (input.as_bytes()[5] as char == 'c'))
+                            {
                                 return Some(30);
                             } else {
                                 return None;
@@ -345,14 +379,19 @@ pub fn nested_switch(input: &str) -> Option<usize> {
 
                         // string
                         'r' => {
-                            if input == "string" {
+                            if (input.as_bytes()[3] as char == 'i')
+                                & ((input.as_bytes()[4] as char == 'n')
+                                    & (input.as_bytes()[5] as char == 'g'))
+                            {
                                 return Some(6);
                             } else {
                                 return None;
                             }
                         }
 
-                        _ => {}
+                        _ => {
+                            return None;
+                        }
                     }
                 }
 
@@ -365,7 +404,9 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
@@ -411,11 +452,15 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                             }
                         }
 
-                        _ => {}
+                        _ => {
+                            return None;
+                        }
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
@@ -440,7 +485,9 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
@@ -474,12 +521,14 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     }
                 }
 
-                _ => {}
+                _ => {
+                    return None;
+                }
             }
         }
 
-        _ => {}
+        _ => {
+            return None;
+        }
     }
-
-    return None;
 }

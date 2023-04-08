@@ -4,7 +4,7 @@ module.exports = function nested_switch(input) {
     case 2:
       switch (input[0]) {
         // do
-        case "d":
+        case 'd':
           if (input[1] == "o") {
             return 40;
           } else {
@@ -12,23 +12,29 @@ module.exports = function nested_switch(input) {
           }
 
         // if, in
-        case "i":
+        case 'i':
           switch (input[1]) {
             // if
-            case "f":
+            case 'f':
               return 1;
 
             // in
-            case "n":
+            case 'n':
               return 24;
+
+            default:
+              return null;
           }
+
+        default:
+          return null;
       }
 
     // var, get, for, new, any, let, try
     case 3:
       switch (input[0]) {
         // any
-        case "a":
+        case 'a':
           if ((input[1] == "n") & (input[2] == "y")) {
             return 28;
           } else {
@@ -36,7 +42,7 @@ module.exports = function nested_switch(input) {
           }
 
         // for
-        case "f":
+        case 'f':
           if ((input[1] == "o") & (input[2] == "r")) {
             return 17;
           } else {
@@ -44,7 +50,7 @@ module.exports = function nested_switch(input) {
           }
 
         // get
-        case "g":
+        case 'g':
           if ((input[1] == "e") & (input[2] == "t")) {
             return 7;
           } else {
@@ -52,7 +58,7 @@ module.exports = function nested_switch(input) {
           }
 
         // let
-        case "l":
+        case 'l':
           if ((input[1] == "e") & (input[2] == "t")) {
             return 31;
           } else {
@@ -60,7 +66,7 @@ module.exports = function nested_switch(input) {
           }
 
         // new
-        case "n":
+        case 'n':
           if ((input[1] == "e") & (input[2] == "w")) {
             return 23;
           } else {
@@ -68,7 +74,7 @@ module.exports = function nested_switch(input) {
           }
 
         // try
-        case "t":
+        case 't':
           if ((input[1] == "r") & (input[2] == "y")) {
             return 36;
           } else {
@@ -76,30 +82,33 @@ module.exports = function nested_switch(input) {
           }
 
         // var
-        case "v":
+        case 'v':
           if ((input[1] == "a") & (input[2] == "r")) {
             return 4;
           } else {
             return null;
           }
+
+        default:
+          return null;
       }
 
     // case, else, type, enum, void, null, this, true
     case 4:
       switch (input[0]) {
         // case
-        case "c":
-          if (input == "case") {
+        case 'c':
+          if ((input[1] == "a") & ((input[2] == "s") & (input[3] == "e"))) {
             return 0;
           } else {
             return null;
           }
 
         // else, enum
-        case "e":
+        case 'e':
           switch (input[1]) {
             // else
-            case "l":
+            case 'l':
               if ((input[2] == "s") & (input[3] == "e")) {
                 return 3;
               } else {
@@ -107,27 +116,30 @@ module.exports = function nested_switch(input) {
               }
 
             // enum
-            case "n":
+            case 'n':
               if ((input[2] == "u") & (input[3] == "m")) {
                 return 14;
               } else {
                 return null;
               }
+
+            default:
+              return null;
           }
 
         // null
-        case "n":
-          if (input == "null") {
+        case 'n':
+          if ((input[1] == "u") & ((input[2] == "l") & (input[3] == "l"))) {
             return 20;
           } else {
             return null;
           }
 
         // type, this, true
-        case "t":
+        case 't':
           switch (input[1]) {
             // this
-            case "h":
+            case 'h':
               if ((input[2] == "i") & (input[3] == "s")) {
                 return 22;
               } else {
@@ -135,7 +147,7 @@ module.exports = function nested_switch(input) {
               }
 
             // true
-            case "r":
+            case 'r':
               if ((input[2] == "u") & (input[3] == "e")) {
                 return 26;
               } else {
@@ -143,48 +155,57 @@ module.exports = function nested_switch(input) {
               }
 
             // type
-            case "y":
+            case 'y':
               if ((input[2] == "p") & (input[3] == "e")) {
                 return 9;
               } else {
                 return null;
               }
+
+            default:
+              return null;
           }
 
         // void
-        case "v":
-          if (input == "void") {
+        case 'v':
+          if ((input[1] == "o") & ((input[2] == "i") & (input[3] == "d"))) {
             return 19;
           } else {
             return null;
           }
+
+        default:
+          return null;
       }
 
     // throw, while, super, false, yield, const, catch
     case 5:
       switch (input[0]) {
         // const, catch
-        case "c":
+        case 'c':
           switch (input[1]) {
             // catch
-            case "a":
-              if (input == "catch") {
+            case 'a':
+              if ((input[2] == "t") & ((input[3] == "c") & (input[4] == "h"))) {
                 return 41;
               } else {
                 return null;
               }
 
             // const
-            case "o":
-              if (input == "const") {
+            case 'o':
+              if ((input[2] == "n") & ((input[3] == "s") & (input[4] == "t"))) {
                 return 38;
               } else {
                 return null;
               }
+
+            default:
+              return null;
           }
 
         // false
-        case "f":
+        case 'f':
           if (input == "false") {
             return 27;
           } else {
@@ -192,7 +213,7 @@ module.exports = function nested_switch(input) {
           }
 
         // super
-        case "s":
+        case 's':
           if (input == "super") {
             return 21;
           } else {
@@ -200,7 +221,7 @@ module.exports = function nested_switch(input) {
           }
 
         // throw
-        case "t":
+        case 't':
           if (input == "throw") {
             return 2;
           } else {
@@ -208,7 +229,7 @@ module.exports = function nested_switch(input) {
           }
 
         // while
-        case "w":
+        case 'w':
           if (input == "while") {
             return 18;
           } else {
@@ -216,19 +237,22 @@ module.exports = function nested_switch(input) {
           }
 
         // yield
-        case "y":
+        case 'y':
           if (input == "yield") {
             return 37;
           } else {
             return null;
           }
+
+        default:
+          return null;
       }
 
     // number, string, module, typeof, public, export, return, static
     case 6:
       switch (input[0]) {
         // export
-        case "e":
+        case 'e':
           if (input == "export") {
             return 15;
           } else {
@@ -236,7 +260,7 @@ module.exports = function nested_switch(input) {
           }
 
         // module
-        case "m":
+        case 'm':
           if (input == "module") {
             return 8;
           } else {
@@ -244,7 +268,7 @@ module.exports = function nested_switch(input) {
           }
 
         // number
-        case "n":
+        case 'n':
           if (input == "number") {
             return 5;
           } else {
@@ -252,7 +276,7 @@ module.exports = function nested_switch(input) {
           }
 
         // public
-        case "p":
+        case 'p':
           if (input == "public") {
             return 12;
           } else {
@@ -260,7 +284,7 @@ module.exports = function nested_switch(input) {
           }
 
         // return
-        case "r":
+        case 'r':
           if (input == "return") {
             return 25;
           } else {
@@ -268,39 +292,45 @@ module.exports = function nested_switch(input) {
           }
 
         // string, static
-        case "s":
+        case 's':
           switch (input[2]) {
             // static
-            case "a":
-              if (input == "static") {
+            case 'a':
+              if ((input[3] == "t") & ((input[4] == "i") & (input[5] == "c"))) {
                 return 30;
               } else {
                 return null;
               }
 
             // string
-            case "r":
-              if (input == "string") {
+            case 'r':
+              if ((input[3] == "i") & ((input[4] == "n") & (input[5] == "g"))) {
                 return 6;
               } else {
                 return null;
               }
+
+            default:
+              return null;
           }
 
         // typeof
-        case "t":
+        case 't':
           if (input == "typeof") {
             return 11;
           } else {
             return null;
           }
+
+        default:
+          return null;
       }
 
     // private, finally, extends, package
     case 7:
       switch (input[0]) {
         // extends
-        case "e":
+        case 'e':
           if (input == "extends") {
             return 29;
           } else {
@@ -308,7 +338,7 @@ module.exports = function nested_switch(input) {
           }
 
         // finally
-        case "f":
+        case 'f':
           if (input == "finally") {
             return 16;
           } else {
@@ -316,10 +346,10 @@ module.exports = function nested_switch(input) {
           }
 
         // private, package
-        case "p":
+        case 'p':
           switch (input[1]) {
             // package
-            case "a":
+            case 'a':
               if (input == "package") {
                 return 32;
               } else {
@@ -327,20 +357,26 @@ module.exports = function nested_switch(input) {
               }
 
             // private
-            case "r":
+            case 'r':
               if (input == "private") {
                 return 13;
               } else {
                 return null;
               }
+
+            default:
+              return null;
           }
+
+        default:
+          return null;
       }
 
     // function, continue
     case 8:
       switch (input[0]) {
         // continue
-        case "c":
+        case 'c':
           if (input == "continue") {
             return 39;
           } else {
@@ -348,12 +384,15 @@ module.exports = function nested_switch(input) {
           }
 
         // function
-        case "f":
+        case 'f':
           if (input == "function") {
             return 35;
           } else {
             return null;
           }
+
+        default:
+          return null;
       }
 
     // interface
@@ -368,7 +407,7 @@ module.exports = function nested_switch(input) {
     case 10:
       switch (input[1]) {
         // implements
-        case "m":
+        case 'm':
           if (input == "implements") {
             return 33;
           } else {
@@ -376,14 +415,20 @@ module.exports = function nested_switch(input) {
           }
 
         // instanceof
-        case "n":
+        case 'n':
           if (input == "instanceof") {
             return 10;
           } else {
             return null;
           }
+
+        default:
+          return null;
       }
+
+    default:
+      return null;
   }
 
   return null;
-};
+}

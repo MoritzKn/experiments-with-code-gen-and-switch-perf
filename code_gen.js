@@ -169,7 +169,7 @@ function basedOnPrefix(values, depth) {
     type: "switch",
     value: { type: "nthLetterOf", ofVar: "input", nth: depth },
     cases,
-    default: null,
+    default: { type: "return", value: option() },
   };
 
   return ast;
@@ -250,10 +250,10 @@ function generateNestedSwitch(values) {
           type: "switch",
           value: { type: "lengthOf", value: { type: "var", name: "input" } },
           cases,
-          default: null,
+          default: { type: "return", value: option() },
         },
-        { type: "nl" },
-        { type: "return", value: option() },
+        // { type: "nl" },
+        // { type: "return", value: option() },
       ],
     },
   };
@@ -293,7 +293,7 @@ function generateBasicSwitch(values) {
           type: "switch",
           value: { type: "var", name: "input" },
           cases,
-          default: null,
+          default: { type: "return", value: option() },
         },
         { type: "nl" },
         { type: "return", value: option() },
@@ -337,9 +337,14 @@ function astToJs(ast, depth = 0) {
           );
         }
         case "switch": {
+          let body = ast.cases.map((case_) => astToJs(case_, depth + 1));
+          if (ast.default) {
+            body.push(`default:\n${ind}    ${astToJs(ast.default, depth + 1)}`);
+          }
+
           return (
             `switch (${astToJs(ast.value, depth + 1)}) {\n${ind}  ${deIndent(
-              ast.cases.map((case_) => astToJs(case_, depth + 1)).join("")
+              body.join("")
             )}}\n` + ind
           );
         }
@@ -450,10 +455,16 @@ function astToRust(ast, depth = 0) {
           );
         }
         case "switch": {
+          let body = ast.cases.map((case_) => astToRust(case_, depth + 1));
+          if (ast.default) {
+            body.push(
+              `_ => {\n${ind}    ${astToRust(ast.default, depth + 1)}}\n${ind}  `
+            );
+          }
+
           return (
             `match ${astToRust(ast.value, depth + 1)} {\n${ind}  ${deIndent(
-              ast.cases.map((case_) => astToRust(case_, depth + 1)).join("") +
-                `_ => {}\n${ind}  `
+              body.join("")
             )}}\n` + ind
           );
         }
@@ -560,4 +571,4 @@ function astToRust(ast, depth = 0) {
   return code;
 }
 
-console.log(astToJs(generateNestedSwitch(keywords)));
+console.log(astToRust(generateNestedSwitch(keywords)));
