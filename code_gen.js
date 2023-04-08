@@ -394,6 +394,21 @@ function astToJs(ast, depth = 0) {
         case "literal": {
           return JSON.stringify(ast.value);
         }
+        case "ifelse": {
+          return (
+            `if (${astToJs(ast.condition, depth)}) {\n${ind}  ${deIndent(
+              astToJs(ast.ifTrue, depth + 1)
+            )}} else {\n${ind}  ${deIndent(
+              astToJs(ast.ifFalse, depth + 1)
+            )}}\n` + ind
+          );
+        }
+        case "equalityCheck": {
+          return `${astToJs(ast.a)} == ${astToJs(ast.b)}`;
+        }
+        case "and": {
+          return `(${astToJs(ast.a)}) & (${astToJs(ast.b)})`;
+        }
         case "arg": {
           return `${ast.name}`;
         }
@@ -545,4 +560,4 @@ function astToRust(ast, depth = 0) {
   return code;
 }
 
-console.log(astToRust(generateNestedSwitch(keywords)));
+console.log(astToJs(generateNestedSwitch(keywords)));

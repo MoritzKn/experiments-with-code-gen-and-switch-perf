@@ -73,7 +73,11 @@ function nested_switch(input) {
       switch (input[0]) {
         // do
         case "d":
-          return 40;
+          if (input[1] == "o") {
+            return 40;
+          } else {
+            return null;
+          }
 
         // if, in
         case "i":
@@ -93,31 +97,59 @@ function nested_switch(input) {
       switch (input[0]) {
         // any
         case "a":
-          return 28;
+          if ((input[1] == "n") & (input[2] == "y")) {
+            return 28;
+          } else {
+            return null;
+          }
 
         // for
         case "f":
-          return 17;
+          if ((input[1] == "o") & (input[2] == "r")) {
+            return 17;
+          } else {
+            return null;
+          }
 
         // get
         case "g":
-          return 7;
+          if ((input[1] == "e") & (input[2] == "t")) {
+            return 7;
+          } else {
+            return null;
+          }
 
         // let
         case "l":
-          return 31;
+          if ((input[1] == "e") & (input[2] == "t")) {
+            return 31;
+          } else {
+            return null;
+          }
 
         // new
         case "n":
-          return 23;
+          if ((input[1] == "e") & (input[2] == "w")) {
+            return 23;
+          } else {
+            return null;
+          }
 
         // try
         case "t":
-          return 36;
+          if ((input[1] == "r") & (input[2] == "y")) {
+            return 36;
+          } else {
+            return null;
+          }
 
         // var
         case "v":
-          return 4;
+          if ((input[1] == "a") & (input[2] == "r")) {
+            return 4;
+          } else {
+            return null;
+          }
       }
 
     // case, else, type, enum, void, null, this, true
@@ -125,43 +157,75 @@ function nested_switch(input) {
       switch (input[0]) {
         // case
         case "c":
-          return 0;
+          if (input == "case") {
+            return 0;
+          } else {
+            return null;
+          }
 
         // else, enum
         case "e":
           switch (input[1]) {
             // else
             case "l":
-              return 3;
+              if ((input[2] == "s") & (input[3] == "e")) {
+                return 3;
+              } else {
+                return null;
+              }
 
             // enum
             case "n":
-              return 14;
+              if ((input[2] == "u") & (input[3] == "m")) {
+                return 14;
+              } else {
+                return null;
+              }
           }
 
         // null
         case "n":
-          return 20;
+          if (input == "null") {
+            return 20;
+          } else {
+            return null;
+          }
 
         // type, this, true
         case "t":
           switch (input[1]) {
             // this
             case "h":
-              return 22;
+              if ((input[2] == "i") & (input[3] == "s")) {
+                return 22;
+              } else {
+                return null;
+              }
 
             // true
             case "r":
-              return 26;
+              if ((input[2] == "u") & (input[3] == "e")) {
+                return 26;
+              } else {
+                return null;
+              }
 
             // type
             case "y":
-              return 9;
+              if ((input[2] == "p") & (input[3] == "e")) {
+                return 9;
+              } else {
+                return null;
+              }
           }
 
         // void
         case "v":
-          return 19;
+          if (input == "void") {
+            return 19;
+          } else {
+            return null;
+          }
       }
 
     // throw, while, super, false, yield, const, catch
@@ -172,32 +236,60 @@ function nested_switch(input) {
           switch (input[1]) {
             // catch
             case "a":
-              return 41;
+              if (input == "catch") {
+                return 41;
+              } else {
+                return null;
+              }
 
             // const
             case "o":
-              return 38;
+              if (input == "const") {
+                return 38;
+              } else {
+                return null;
+              }
           }
 
         // false
         case "f":
-          return 27;
+          if (input == "false") {
+            return 27;
+          } else {
+            return null;
+          }
 
         // super
         case "s":
-          return 21;
+          if (input == "super") {
+            return 21;
+          } else {
+            return null;
+          }
 
         // throw
         case "t":
-          return 2;
+          if (input == "throw") {
+            return 2;
+          } else {
+            return null;
+          }
 
         // while
         case "w":
-          return 18;
+          if (input == "while") {
+            return 18;
+          } else {
+            return null;
+          }
 
         // yield
         case "y":
-          return 37;
+          if (input == "yield") {
+            return 37;
+          } else {
+            return null;
+          }
       }
 
     // number, string, module, typeof, public, export, return, static
@@ -205,39 +297,71 @@ function nested_switch(input) {
       switch (input[0]) {
         // export
         case "e":
-          return 15;
+          if (input == "export") {
+            return 15;
+          } else {
+            return null;
+          }
 
         // module
         case "m":
-          return 8;
+          if (input == "module") {
+            return 8;
+          } else {
+            return null;
+          }
 
         // number
         case "n":
-          return 5;
+          if (input == "number") {
+            return 5;
+          } else {
+            return null;
+          }
 
         // public
         case "p":
-          return 12;
+          if (input == "public") {
+            return 12;
+          } else {
+            return null;
+          }
 
         // return
         case "r":
-          return 25;
+          if (input == "return") {
+            return 25;
+          } else {
+            return null;
+          }
 
         // string, static
         case "s":
           switch (input[2]) {
             // static
             case "a":
-              return 30;
+              if (input == "static") {
+                return 30;
+              } else {
+                return null;
+              }
 
             // string
             case "r":
-              return 6;
+              if (input == "string") {
+                return 6;
+              } else {
+                return null;
+              }
           }
 
         // typeof
         case "t":
-          return 11;
+          if (input == "typeof") {
+            return 11;
+          } else {
+            return null;
+          }
       }
 
     // private, finally, extends, package
@@ -245,22 +369,38 @@ function nested_switch(input) {
       switch (input[0]) {
         // extends
         case "e":
-          return 29;
+          if (input == "extends") {
+            return 29;
+          } else {
+            return null;
+          }
 
         // finally
         case "f":
-          return 16;
+          if (input == "finally") {
+            return 16;
+          } else {
+            return null;
+          }
 
         // private, package
         case "p":
           switch (input[1]) {
             // package
             case "a":
-              return 32;
+              if (input == "package") {
+                return 32;
+              } else {
+                return null;
+              }
 
             // private
             case "r":
-              return 13;
+              if (input == "private") {
+                return 13;
+              } else {
+                return null;
+              }
           }
       }
 
@@ -269,27 +409,47 @@ function nested_switch(input) {
       switch (input[0]) {
         // continue
         case "c":
-          return 39;
+          if (input == "continue") {
+            return 39;
+          } else {
+            return null;
+          }
 
         // function
         case "f":
-          return 35;
+          if (input == "function") {
+            return 35;
+          } else {
+            return null;
+          }
       }
 
     // interface
     case 9:
-      return 34;
+      if (input == "interface") {
+        return 34;
+      } else {
+        return null;
+      }
 
     // instanceof, implements
     case 10:
       switch (input[1]) {
         // implements
         case "m":
-          return 33;
+          if (input == "implements") {
+            return 33;
+          } else {
+            return null;
+          }
 
         // instanceof
         case "n":
-          return 10;
+          if (input == "instanceof") {
+            return 10;
+          } else {
+            return null;
+          }
       }
   }
 
@@ -407,7 +567,7 @@ function test_nested_switch() {
   for (let i = 0; i < len; i++) {
     const word = words[i];
     let index = nested_switch(word);
-    let isKeyword = index !== null && word === keywords[index];
+    let isKeyword = index !== null;
     res[i] = isKeyword;
     // console.log(word, index, isKeyword);
   }
