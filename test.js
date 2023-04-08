@@ -393,7 +393,7 @@ function test_basic_switch() {
   for (let i = 0; i < len; i++) {
     const word = words[i];
     let index = basic_switch(word);
-    let isKeyword = index !== null && word === keywords[index];
+    let isKeyword = index !== null;
     res[i] = isKeyword;
     // console.log(word, index, isKeyword);
   }

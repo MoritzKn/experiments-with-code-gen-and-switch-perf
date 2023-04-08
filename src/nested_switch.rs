@@ -5,7 +5,11 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[0] as char {
                 // do
                 'd' => {
-                    return Some(40);
+                    if input.as_bytes()[1] as char == 'o' {
+                        return Some(40);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // if, in
@@ -34,37 +38,65 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[0] as char {
                 // any
                 'a' => {
-                    return Some(28);
+                    if (input.as_bytes()[1] as char == 'n') & (input.as_bytes()[2] as char == 'y') {
+                        return Some(28);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // for
                 'f' => {
-                    return Some(17);
+                    if (input.as_bytes()[1] as char == 'o') & (input.as_bytes()[2] as char == 'r') {
+                        return Some(17);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // get
                 'g' => {
-                    return Some(7);
+                    if (input.as_bytes()[1] as char == 'e') & (input.as_bytes()[2] as char == 't') {
+                        return Some(7);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // let
                 'l' => {
-                    return Some(31);
+                    if (input.as_bytes()[1] as char == 'e') & (input.as_bytes()[2] as char == 't') {
+                        return Some(31);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // new
                 'n' => {
-                    return Some(23);
+                    if (input.as_bytes()[1] as char == 'e') & (input.as_bytes()[2] as char == 'w') {
+                        return Some(23);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // try
                 't' => {
-                    return Some(36);
+                    if (input.as_bytes()[1] as char == 'r') & (input.as_bytes()[2] as char == 'y') {
+                        return Some(36);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // var
                 'v' => {
-                    return Some(4);
+                    if (input.as_bytes()[1] as char == 'a') & (input.as_bytes()[2] as char == 'r') {
+                        return Some(4);
+                    } else {
+                        return None;
+                    }
                 }
 
                 _ => {}
@@ -76,7 +108,11 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[0] as char {
                 // case
                 'c' => {
-                    return Some(0);
+                    if input == "case" {
+                        return Some(0);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // else, enum
@@ -84,12 +120,24 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     match input.as_bytes()[1] as char {
                         // else
                         'l' => {
-                            return Some(3);
+                            if (input.as_bytes()[2] as char == 's')
+                                & (input.as_bytes()[3] as char == 'e')
+                            {
+                                return Some(3);
+                            } else {
+                                return None;
+                            }
                         }
 
                         // enum
                         'n' => {
-                            return Some(14);
+                            if (input.as_bytes()[2] as char == 'u')
+                                & (input.as_bytes()[3] as char == 'm')
+                            {
+                                return Some(14);
+                            } else {
+                                return None;
+                            }
                         }
 
                         _ => {}
@@ -98,7 +146,11 @@ pub fn nested_switch(input: &str) -> Option<usize> {
 
                 // null
                 'n' => {
-                    return Some(20);
+                    if input == "null" {
+                        return Some(20);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // type, this, true
@@ -106,17 +158,35 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     match input.as_bytes()[1] as char {
                         // this
                         'h' => {
-                            return Some(22);
+                            if (input.as_bytes()[2] as char == 'i')
+                                & (input.as_bytes()[3] as char == 's')
+                            {
+                                return Some(22);
+                            } else {
+                                return None;
+                            }
                         }
 
                         // true
                         'r' => {
-                            return Some(26);
+                            if (input.as_bytes()[2] as char == 'u')
+                                & (input.as_bytes()[3] as char == 'e')
+                            {
+                                return Some(26);
+                            } else {
+                                return None;
+                            }
                         }
 
                         // type
                         'y' => {
-                            return Some(9);
+                            if (input.as_bytes()[2] as char == 'p')
+                                & (input.as_bytes()[3] as char == 'e')
+                            {
+                                return Some(9);
+                            } else {
+                                return None;
+                            }
                         }
 
                         _ => {}
@@ -125,7 +195,11 @@ pub fn nested_switch(input: &str) -> Option<usize> {
 
                 // void
                 'v' => {
-                    return Some(19);
+                    if input == "void" {
+                        return Some(19);
+                    } else {
+                        return None;
+                    }
                 }
 
                 _ => {}
@@ -140,12 +214,20 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     match input.as_bytes()[1] as char {
                         // catch
                         'a' => {
-                            return Some(41);
+                            if input == "catch" {
+                                return Some(41);
+                            } else {
+                                return None;
+                            }
                         }
 
                         // const
                         'o' => {
-                            return Some(38);
+                            if input == "const" {
+                                return Some(38);
+                            } else {
+                                return None;
+                            }
                         }
 
                         _ => {}
@@ -154,27 +236,47 @@ pub fn nested_switch(input: &str) -> Option<usize> {
 
                 // false
                 'f' => {
-                    return Some(27);
+                    if input == "false" {
+                        return Some(27);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // super
                 's' => {
-                    return Some(21);
+                    if input == "super" {
+                        return Some(21);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // throw
                 't' => {
-                    return Some(2);
+                    if input == "throw" {
+                        return Some(2);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // while
                 'w' => {
-                    return Some(18);
+                    if input == "while" {
+                        return Some(18);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // yield
                 'y' => {
-                    return Some(37);
+                    if input == "yield" {
+                        return Some(37);
+                    } else {
+                        return None;
+                    }
                 }
 
                 _ => {}
@@ -186,27 +288,47 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[0] as char {
                 // export
                 'e' => {
-                    return Some(15);
+                    if input == "export" {
+                        return Some(15);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // module
                 'm' => {
-                    return Some(8);
+                    if input == "module" {
+                        return Some(8);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // number
                 'n' => {
-                    return Some(5);
+                    if input == "number" {
+                        return Some(5);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // public
                 'p' => {
-                    return Some(12);
+                    if input == "public" {
+                        return Some(12);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // return
                 'r' => {
-                    return Some(25);
+                    if input == "return" {
+                        return Some(25);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // string, static
@@ -214,12 +336,20 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     match input.as_bytes()[2] as char {
                         // static
                         'a' => {
-                            return Some(30);
+                            if input == "static" {
+                                return Some(30);
+                            } else {
+                                return None;
+                            }
                         }
 
                         // string
                         'r' => {
-                            return Some(6);
+                            if input == "string" {
+                                return Some(6);
+                            } else {
+                                return None;
+                            }
                         }
 
                         _ => {}
@@ -228,7 +358,11 @@ pub fn nested_switch(input: &str) -> Option<usize> {
 
                 // typeof
                 't' => {
-                    return Some(11);
+                    if input == "typeof" {
+                        return Some(11);
+                    } else {
+                        return None;
+                    }
                 }
 
                 _ => {}
@@ -240,12 +374,20 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[0] as char {
                 // extends
                 'e' => {
-                    return Some(29);
+                    if input == "extends" {
+                        return Some(29);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // finally
                 'f' => {
-                    return Some(16);
+                    if input == "finally" {
+                        return Some(16);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // private, package
@@ -253,12 +395,20 @@ pub fn nested_switch(input: &str) -> Option<usize> {
                     match input.as_bytes()[1] as char {
                         // package
                         'a' => {
-                            return Some(32);
+                            if input == "package" {
+                                return Some(32);
+                            } else {
+                                return None;
+                            }
                         }
 
                         // private
                         'r' => {
-                            return Some(13);
+                            if input == "private" {
+                                return Some(13);
+                            } else {
+                                return None;
+                            }
                         }
 
                         _ => {}
@@ -274,12 +424,20 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[0] as char {
                 // continue
                 'c' => {
-                    return Some(39);
+                    if input == "continue" {
+                        return Some(39);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // function
                 'f' => {
-                    return Some(35);
+                    if input == "function" {
+                        return Some(35);
+                    } else {
+                        return None;
+                    }
                 }
 
                 _ => {}
@@ -288,7 +446,11 @@ pub fn nested_switch(input: &str) -> Option<usize> {
 
         // interface
         9 => {
-            return Some(34);
+            if input == "interface" {
+                return Some(34);
+            } else {
+                return None;
+            }
         }
 
         // instanceof, implements
@@ -296,12 +458,20 @@ pub fn nested_switch(input: &str) -> Option<usize> {
             match input.as_bytes()[1] as char {
                 // implements
                 'm' => {
-                    return Some(33);
+                    if input == "implements" {
+                        return Some(33);
+                    } else {
+                        return None;
+                    }
                 }
 
                 // instanceof
                 'n' => {
-                    return Some(10);
+                    if input == "instanceof" {
+                        return Some(10);
+                    } else {
+                        return None;
+                    }
                 }
 
                 _ => {}

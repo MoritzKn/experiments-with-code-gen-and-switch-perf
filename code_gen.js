@@ -82,15 +82,73 @@ function basedOnPrefix(values, depth) {
   let cases = prefixes.flatMap((prefix) => {
     const valuesLeft = prefixBuckets[prefix];
     if (valuesLeft.length === 1) {
+      const value = valuesLeft[0];
+
+      const resultAst = {
+        type: "return",
+        value: option(keywords.indexOf(value)),
+      };
+      const mismatchAst = {
+        type: "return",
+        value: option(),
+      };
+
+      let bodyAst = resultAst;
+      const uncheckedLetters = value.length - (depth + 1);
+      if (uncheckedLetters > 0) {
+        let conditionAst;
+
+        // Trickery to safe comparisons of known letters and
+        // avoid bounds checks. But seems to make no real difference.
+        // Maybe rustc can already tell that this is possible.
+        if (uncheckedLetters <= 2) {
+          let conditions = [];
+          for (let i = value.length - uncheckedLetters; i < value.length; i++) {
+            // for (let i = 0; i < value.length; i++) {
+            conditions.push({
+              type: "equalityCheck",
+              a: { type: "nthLetterOf", ofVar: "input", nth: i },
+              b: { type: "literal", value: value[i] },
+            });
+          }
+          conditionAst = conditions.pop();
+          let nextCondition;
+          while ((nextCondition = conditions.pop())) {
+            conditionAst = {
+              type: "and",
+              a: nextCondition,
+              b: conditionAst,
+            };
+          }
+        } else {
+          // Just check it all using a native function...
+          conditionAst = {
+            type: "equalityCheck",
+            a: {
+              type: "var",
+              name: "input",
+            },
+            b: {
+              type: "literal",
+              value: valuesLeft[0],
+            },
+          };
+        }
+
+        bodyAst = {
+          type: "ifelse",
+          condition: conditionAst,
+          ifTrue: resultAst,
+          ifFalse: mismatchAst,
+        };
+      }
+
       return [
         { type: "comment", content: valuesLeft.join(", ") },
         {
           type: "case",
           value: prefix,
-          body: {
-            type: "return",
-            value: option(keywords.indexOf(valuesLeft[0])),
-          },
+          body: bodyAst,
         },
         { type: "nl" },
       ];
@@ -141,8 +199,26 @@ function generateNestedSwitch(values) {
           type: "case",
           value: length,
           body: {
-            type: "return",
-            value: option(keywords.indexOf(valuesLeft[0])),
+            type: "ifelse",
+            condition: {
+              type: "equalityCheck",
+              a: {
+                type: "var",
+                name: "input",
+              },
+              b: {
+                type: "literal",
+                value: valuesLeft[0],
+              },
+            },
+            ifTrue: {
+              type: "return",
+              value: option(keywords.indexOf(valuesLeft[0])),
+            },
+            ifFalse: {
+              type: "return",
+              value: option(),
+            },
           },
         },
         { type: "nl" },
@@ -406,8 +482,8 @@ function astToRust(ast, depth = 0) {
           return `\n` + ind;
         }
         case "nthLetterOf": {
-          return `${ast.ofVar}.as_bytes()[${ast.nth}] as char`;
           // return `unsafe { *${ast.ofVar}.as_bytes().get_unchecked(${ast.nth}) } as char`;
+          return `${ast.ofVar}.as_bytes()[${ast.nth}] as char`;
         }
         case "return": {
           return `return ${astToRust(ast.value, depth)};\n` + ind;
@@ -419,7 +495,30 @@ function astToRust(ast, depth = 0) {
           return `Some(${astToRust(ast.value, depth)})`;
         }
         case "literal": {
-          return JSON.stringify(ast.value);
+          let value = ast.value;
+          if (typeof value === "string") {
+            if (value.length === 1) {
+              value = `'${ast.value}'`;
+            } else {
+              value = JSON.stringify(value);
+            }
+          }
+          return value;
+        }
+        case "ifelse": {
+          return (
+            `if ${astToRust(ast.condition, depth)} {\n${ind}  ${deIndent(
+              astToRust(ast.ifTrue, depth + 1)
+            )}} else {\n${ind}  ${deIndent(
+              astToRust(ast.ifFalse, depth + 1)
+            )}}\n` + ind
+          );
+        }
+        case "equalityCheck": {
+          return `${astToRust(ast.a)} == ${astToRust(ast.b)}`;
+        }
+        case "and": {
+          return `(${astToRust(ast.a)}) & (${astToRust(ast.b)})`;
         }
         case "arg": {
           return `${ast.name}: ${ast.argType}`;

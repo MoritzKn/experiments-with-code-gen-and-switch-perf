@@ -15,11 +15,7 @@ fn test_basic_switch(words: &[&str], res: &mut Vec<bool>) -> Duration {
     let start = Instant::now();
     for (i, word) in words.iter().enumerate() {
         let index = basic_switch(word);
-        let is_keyword = if let Some(index) = index {
-            *word == KEYWORDS_LIST[index]
-        } else {
-            false
-        };
+        let is_keyword = index.is_some();
         res[i] = is_keyword;
 
         // println!("{} {:?} {}", word, index, is_keyword);
@@ -34,11 +30,7 @@ fn test_nested_switch(words: &[&str], res: &mut Vec<bool>) -> Duration {
     let start = Instant::now();
     for (i, word) in words.iter().enumerate() {
         let index = nested_switch(word);
-        let is_keyword = if let Some(index) = index {
-            *word == KEYWORDS_LIST[index]
-        } else {
-            false
-        };
+        let is_keyword = index.is_some();
         res[i] = is_keyword;
 
         // println!("{} {:?} {}", word, index, is_keyword);
@@ -82,10 +74,19 @@ fn main() {
         time_nested_switch = time_nested_switch + test_nested_switch(&words, &mut res);
     }
 
+    let checks = iterations * words.len();
     println!("");
-    println!("time_basic_switch: {:?}", time_basic_switch);
-    println!("time_nested_switch: {:?}", time_nested_switch);
-    println!("{} checks", iterations * words.len());
+    println!(
+        "time_basic_switch: {:?} {:.1}M/s",
+        time_basic_switch,
+        (checks as f64 / (time_basic_switch.as_millis() as f64 / 1000.0)) / 1_000_000.0
+    );
+    println!(
+        "time_nested_switch: {:?} {:.1}M/s",
+        time_nested_switch,
+        (checks as f64 / (time_nested_switch.as_millis() as f64 / 1000.0)) / 1_000_000.0
+    );
+    println!("{} checks", checks);
 
     // Make sure there is definity no optimization that breaks the benchmark
     println!("");
