@@ -101,7 +101,7 @@ function basedOnPrefix(values, depth) {
         // Trickery to safe comparisons of known letters and
         // avoid bounds checks. But seems to make no real difference.
         // Maybe rustc can already tell that this is possible.
-        if (uncheckedLetters <= 2) {
+        if (uncheckedLetters > 0 && uncheckedLetters <= 3) {
           let conditions = [];
           for (let i = value.length - uncheckedLetters; i < value.length; i++) {
             // for (let i = 0; i < value.length; i++) {
@@ -331,7 +331,7 @@ function astToJs(ast, depth = 0) {
       switch (ast.type) {
         case "function": {
           return (
-            `function ${ast.name} (${ast.args.map((arg) =>
+            `module.exports = function ${ast.name} (${ast.args.map((arg) =>
               astToJs(arg, depth + 1)
             )}) ${astToJs(ast.body, depth)}` + ind
           );
