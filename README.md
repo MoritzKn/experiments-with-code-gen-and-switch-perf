@@ -35,7 +35,7 @@ time_nested_switch: 362.90529ms 113.8M/s
 41210600 checks
 ```
 
-Run on an Apple M1.
+Benchmarked on an Apple M1.
 
 ## Shouldn't Compilers Just Optimizes This?
 
